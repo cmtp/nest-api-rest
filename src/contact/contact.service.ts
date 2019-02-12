@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class ContactService {
@@ -7,8 +8,8 @@ export class ContactService {
         return id;
     }
     
-    getContacts(): void {
-
+    getContacts(): any[] {
+        return [];
     }
 
     saveContact(): void {

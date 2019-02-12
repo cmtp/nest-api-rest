@@ -1,13 +1,15 @@
-import { Controller, Get, Post, Put, Delete, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
 import { ContactService } from './contact.service';
+import { CreateContactDto } from './dto/create-contact-dto';
+import { Observable, of } from 'rxjs';
 
 @Controller('contacts')
 export class ContactController {
     constructor(private readonly contactService: ContactService) {}
 
     @Get()
-    getContacts(): void {
-        this.contactService.getContacts();
+    getContacts():  Observable<any[]> {
+        return of(this.contactService.getContacts());
     }
 
     @Get(':id')
@@ -15,10 +17,10 @@ export class ContactController {
         return '' + this.contactService.getContact(id);
     }
 
-    // @Post()
-    // saveContact(): string {
-    //     return this.contactService.saveContact();
-    // }
+    @Post()
+    create(@Body() contact: CreateContactDto): void {
+        return this.contactService.saveContact();
+    }
 
     // @Put()
     // editContact(): string {
