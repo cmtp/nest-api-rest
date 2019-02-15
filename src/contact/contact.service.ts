@@ -3,16 +3,18 @@ import { Observable } from 'rxjs';
 import { CreateContactDto } from './dto/create-contact-dto';
 import { Contact } from './interfaces/contact.interface';
 import * as uuidv4 from 'uuid/v4';
+import { log } from 'console';
 
 @Injectable()
 export class ContactService {
-  contacts: Contact[];
+  contacts: Contact[] = [];
 
   async getContact(id: string): Promise<Contact> {
-    let contact = this.contacts.filter(item => {
-      item.id === id;
-    });
-    return contact[0];
+      log(id);
+    let contact = this.contacts.find((item) => {
+        return item.id === id
+    })
+    return contact;
   }
 
   async getContacts(): Promise<Contact[]> {
