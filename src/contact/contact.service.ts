@@ -33,7 +33,20 @@ export class ContactService {
     return newContact;
   }
 
-  editContact(): void {}
+  async editContact(id: string, editContact: CreateContactDto): Promise<Contact> {
+    let contact: Contact = null;
+    this.contacts.forEach((item) => {
+        if (item.id === id) {
+            item.name = editContact.name;
+            item.lastName = editContact.lastName;
+            item.phone = editContact.phone;
+            item.age = editContact.age;
+        }
+    });
+    return contact;
+  }
 
-  deleteContact(): void {}
+  deleteContact(id: string): void {
+
+  }
 }

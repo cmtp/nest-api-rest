@@ -22,10 +22,10 @@ export class ContactController {
         return this.contactService.saveContact(contact);
     }
 
-    // @Put()
-    // editContact(): string {
-    //     return this.contactService.getContact();
-    // }
+    @Put(':id')
+    async editContact(@Param('id') id, @Body() contact: CreateContactDto): Promise<Contact> {
+        return this.contactService.editContact(id, contact);
+    }
 
     // @Delete()
     // deleteContact(): string {
