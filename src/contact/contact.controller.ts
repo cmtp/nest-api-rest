@@ -27,8 +27,8 @@ export class ContactController {
         return this.contactService.editContact(id, contact);
     }
 
-    // @Delete()
-    // deleteContact(): string {
-    //     return this.contactService.getContact();
-    // }
+    @Delete(':id')
+    async deleteContact(@Param('id') id): Promise<boolean> {
+        return this.contactService.deleteContact(id);
+    }
 }

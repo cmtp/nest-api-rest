@@ -10,10 +10,10 @@ export class ContactService {
   contacts: Contact[] = [];
 
   async getContact(id: string): Promise<Contact> {
-      log(id);
-    let contact = this.contacts.find((item) => {
-        return item.id === id
-    })
+    log(id);
+    let contact = this.contacts.find(item => {
+      return item.id === id;
+    });
     return contact;
   }
 
@@ -33,20 +33,33 @@ export class ContactService {
     return newContact;
   }
 
-  async editContact(id: string, editContact: CreateContactDto): Promise<Contact> {
+  async editContact(
+    id: string,
+    editContact: CreateContactDto,
+  ): Promise<Contact> {
     let contact: Contact = null;
-    this.contacts.forEach((item) => {
-        if (item.id === id) {
-            item.name = editContact.name;
-            item.lastName = editContact.lastName;
-            item.phone = editContact.phone;
-            item.age = editContact.age;
-        }
+    this.contacts.forEach(item => {
+      if (item.id === id) {
+        item.name = editContact.name;
+        item.lastName = editContact.lastName;
+        item.phone = editContact.phone;
+        item.age = editContact.age;
+        contact = item;
+      }
     });
     return contact;
   }
 
-  deleteContact(id: string): void {
-
+  async deleteContact(id: string): Promise<boolean> {
+    let pos = 0;
+    let res = false;
+    this.contacts.forEach((item, index) => {
+      if( item.id === id) {
+        pos = index;
+        res = true;
+      }
+    });
+    this.contacts.splice(pos, 1);
+    return res;
   }
 }
