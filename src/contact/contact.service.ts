@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { Observable } from 'rxjs';
 import { CreateContactDto } from './dto/create-contact-dto';
 import { Contact } from './interfaces/contact.interface';
 import * as uuidv4 from 'uuid/v4';
